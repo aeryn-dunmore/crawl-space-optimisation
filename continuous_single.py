@@ -30,18 +30,17 @@ def write_all(files,text):
 		f.flush()
 
 
-params["dataset"] = "Combined Continuous"
+params["dataset"] = #"IEMOCAP" or "K-EmoCon"
 current_wd = os.getcwd()
-best_models = {"DT":{},"RF":{},"XGBoost":{},"ERT":{}}
 
-results_dir = "/Users/spacebug/Library/Mobile Documents/com~apple~CloudDocs/Uni/Thesis Figures and Results/Tokenisation Experiments/Results for Combined Categorical/" #current_wd+"/"+params["dataset"]+" Optimisation Trials/CATEGORICAL/Single Signal/"
+results_dir = current_wd+"/"+params["dataset"]+" Optimisation Trials/Continuous/Single Signal/"
 params["results_dir"] = results_dir
-params["output_dir"] = "/Volumes/PhD Data/Emotion and Speech/Speech Tests and Code/Token Sets/Continuous/"
-params["full_dir"] = results_dir+"/Combined Tokens Optimisation Trials/CONTINUOUS/"
-params["iterations"] = 10
+params["output_dir"] = current_wd+"/Continuous/"
+params["full_dir"] = results_dir
+params["iterations"] = 100
 speech_dir = current_wd+"/"
-dataset_dir = "/Volumes/PhD Data/Emotion and Speech/Speech Tests and Code/Token Sets/Continuous/"
-params["dataset_dir"] = "/Volumes/PhD Data/Emotion and Speech/Speech Tests and Code/Token Sets/Continuous/"
+dataset_dir = current_wd+"/Continuous/"
+params["dataset_dir"] = current_wd+"/Continuous/"
 
 best_model = 10
 params["scale"] = 1
@@ -97,7 +96,7 @@ params["int_val"] = {
 params["all_trials"] = 0
 run_to_solution = False
 params["convergence"] = 0.05
-maximum_runs = 1000
+maximum_runs = 100
 params["rate_of_change"] = 10
 
 
