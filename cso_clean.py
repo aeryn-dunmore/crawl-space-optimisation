@@ -178,7 +178,7 @@ def iter(iteration,current_point=None,val_iteration=0):
 
 def recursive_loop(iteration,current_point,loop_number):
 	global vals,params,base_loop, val_options,val_iters,params_to_opt,accuracy_metrics,iterations,roc
-	global circling, convergence_value, bounds_list, points_list, int_val, all_trials, outfile,csv_file
+	global convergence_value, bounds_list, points_list, int_val, all_trials, outfile,csv_file
 	if loop_number > 0:
 		for v in val_options[vals[loop_number]]:
 			params[vals[loop_number]] = v
@@ -197,31 +197,10 @@ def recursive_loop(iteration,current_point,loop_number):
 				if first:
 					first = False
 
-def circle_point(start_point,start_params):
-	global vals,params,base_loop, val_options,val_iters,params_to_opt,accuracy_metrics,iterations,roc, best_point
-	global circling, convergence_value, bounds_list, points_list, int_val, all_trials, outfile,csv_file, first
-	current_point = start_point
-	best_point = start_point
-	print("\n\tCircling variant in operation.\nSpecified Parameters are:")
-	for v in vals:
-		params[v] = start_params[v]
-		print(f"{v}: {params[v]}")
-	print("Specified start point:")
-	for p in params_to_opt:
-		print(f"{p}: {start_point[p]}")
-	for i in (range(iterations)):
-		print(f"\n\nCurrent rate of change: {roc}")
-		for t in (range(params["specify_loops"])):
-			current_point = iter(all_trials,current_point,t)
-			if first:
-				first = False
-		roc = abs(roc*(1+(((-roc))/100.0)))
-
 def main(param):
 	global vals, val_options,val_iters,params_to_opt,stop_point,accuracy_metrics,iterations,roc,convergence_value, bounds_list, points_list, int_val, all_trials, outfile,csv_file
 	global params,generate_new, since_best,circling,specify_start
 	params = param
-	circling = params["circling"]
 	specify_start = params["specify_start"]
 	since_best = 0
 	generate_new = False
@@ -251,19 +230,11 @@ def main(param):
 	global first
 	first = True
 	best_point = None
-	# try:
-	if circling:
-		for s in params["start_point"]:
-			print(s)
-			roc = params["rate_of_change"]
-			start_point = params["start_point"][s]
-			start_params = params["start_params"][params["start_point_params"][s]]
-			circle_point(start_point,start_params)
-	else:
+	try:
 		for i in range(len(val_options[vals[0]])):
 			global base_loop
 			base_loop = 0
 			recursive_loop(i,None,len(vals)-1)
-	# except Exception as e:
-	#     print(e)
+	except Exception as e:
+		print(e)
 	
