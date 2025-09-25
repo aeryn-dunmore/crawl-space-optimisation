@@ -35,11 +35,11 @@ global test_results
 global model_names
 global params
 params = { "nums":2, "train":True, "test":True, "pickle":False,
-	"overall_val":0, "overall_act":0, "labels":["valence","arousal"], "full_dir":"/Volumes/PhD Data/Emotion and Speech/Speech Tests and Code/Continuous/",
+	"overall_val":0, "overall_act":0, "labels":["valence","arousal"], "full_dir":"/Continuous/",
 	"multioutput":True, "mean":False, "method":"mel", "img":"feature_extract",
-	"results_dir":"/Volumes/PhD Data/Emotion and Speech/Speech Tests and Code/Continuous/", "flatten":False, "img_processing":"dft", "signal_type":"dft", 
+	"results_dir":"/Continuous/", "flatten":False, "img_processing":"dft", "signal_type":"dft", 
 	"get_from_list":True,"type":1,
-	"dataset_dir":"/Volumes/PhD Data/Emotion and Speech/KEmo-Con/", "dataset":"IEMOCAP", 
+	"dataset_dir":"", "dataset":"IEMOCAP", 
 	"use_dominance":False, "combine_bios":False, "individual_scores": True, "combine_here":False, "speech_only":True, "optimiser":"Adam",
 }		
 
@@ -663,14 +663,6 @@ def main(params,accuracy_metrics):
 		date_stamp = date_stamp.replace(i, '.')
 	results_file = params["output_dir"]+dataset+"_output"+date_stamp+".txt"
 	sys.stdout = open(results_file,'w')
-	# gives a single float value
-	print(f"CPU Percent: {psutil.cpu_percent()}")
-	# you can convert that object to a dictionary 
-	print(dict(psutil.virtual_memory()._asdict()))
-	# you can have the percentage of used RAM
-	print(f"Virtual Memory Percentage: {psutil.virtual_memory().percent}")
-	# you can calculate percentage of available memory
-	print(f"Percentage of Available Memory Used: {psutil.virtual_memory().available * 100 / psutil.virtual_memory().total}")
 	last_char = params["results_dir"][len(params["results_dir"])-1]
 	if last_char != "/":
 		params["results_dir"] = params["results_dir"]+"/"
@@ -680,9 +672,6 @@ def main(params,accuracy_metrics):
 	# print(params)
 	# dataset_directory = os.getcwd()
 	sys.stdout.flush()
-	# test_results = pd.DataFrame(columns=("R2","MSE","MAE","MAPE"))
-	# results = pd.DataFrame(columns=("Model","R2 Train","R2 Test","MAE","MSE","RMSE","MBE","MAPE"))
-	# if params["img"] != "raw":
 	fp = open(params["dataset_dir"]+f"Images {params['features']} {params['images']}.pickle","rb")
 	speech_train_full = pickle.load(fp)
 	fp.close()
@@ -692,20 +681,10 @@ def main(params,accuracy_metrics):
 	fp = (params["dataset_dir"]+f"{dataset} Sounds NA 5 labels.csv")
 	speech_y = pd.read_csv(fp)
 	speech_y = speech_y[params["labels"]]
-	# else:
-	# 	if params["features"] != "NA":
-	# 		speech_train = pd.read_csv(params["dataset_dir"]+f"KEmo-Con_{params['features']}_raw_Speech_Data.csv",index_col=0)
-	# 	else:
-	# 		speech_train = pd.read_csv(params["dataset_dir"]+"IEMOCAP_All_Data.csv",index_col=0)
-		# speech_y = speech_train[params['speech_labels']]
-		# speech_y.drop(columns=["subject","seconds"],inplace=True)
-		# speech_train.drop(columns=params['speech_labels'],inplace=True)
-		# speech_train = speech_train.to_numpy()
-		# speech_y = speech_y.to_numpy()
 	speech_y = normalise_column_max_min(speech_y).round(3)
-	# thirty_percent = int(np.shape(speech_train)[0]*0.3)
+	#thirty_percent = int(np.shape(speech_train)[0]*0.3)
 	speech_train,speech_y = shuffle(speech_train,speech_y,random_state=0)
-	# print(f"Using 30% of the full dataset, {thirty_percent} samples total.")
+	#print(f"Using 30% of the full dataset, {thirty_percent} samples total.")
 	print("Dataset loaded.")
 	print(np.shape(speech_y))
 	print(np.shape(speech_train))
