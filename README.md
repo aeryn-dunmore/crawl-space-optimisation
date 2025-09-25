@@ -12,3 +12,5 @@ The dataset can be found here: https://springernature.figshare.com/articles/data
 If you use the new timestamps, please cite both the above paper, and the K-EmoCon paper:
 
 Park, C. Y., Cha, N., Kang, S., Kim, A., Khandoker, A. H., Hadjileontiadis, L., ... & Lee, U. (2020). K-EmoCon, a multimodal sensor dataset for continuous emotion recognition in naturalistic conversations. Scientific Data, 7(1), 293. https://www.nature.com/articles/s41597-020-00630-y
+
+These files also include a copy of the pycochleagram module to generate cochleagrams from sound data. Please reference this code if you utilise it. The original module can be found on GitHub here: https://github.com/mcdermottLab/pycochleagram
