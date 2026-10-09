@@ -48,7 +48,7 @@ Requirements: Python 3.9+, plus `numpy` and `scikit-learn` for the example.
 
 ## K-EmoCon timestamps
 
-The original K-EmoCon labels cover each whole debate, so each participant's labels include periods when they were listening rather than speaking. `subject debate timestamps.csv` gives the start and end of each speaking turn per participant: as minutes.seconds, as a readable duration, in seconds, and as sample indices (frames = seconds × 22,050).
+The original K-EmoCon labels cover each whole debate, so each participant's labels include periods when they were listening rather than speaking. `subject debate timestamps.csv` gives the start and end of each speaking turn per participant: as minutes.seconds, as a readable duration, in seconds, and as sample indices (frames = seconds × 22,050, the sample rate of the processed K-EmoCon audio).
 
 The K-EmoCon dataset is available from [figshare](https://springernature.figshare.com/articles/dataset/Metadata_record_for_K-EmoCon_a_multimodal_sensor_dataset_for_continuous_emotion_recognition_in_naturalistic_conversations/12618797). If you use these timestamps, please cite both the paper above and:
 
